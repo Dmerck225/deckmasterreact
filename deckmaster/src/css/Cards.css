@@ -1,0 +1,127 @@
+@import "../css/Root.css";
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 250px;
+    height: 400px;
+    font-size: 10px;
+    color: var(--card-text-color);
+    margin: 20px;
+
+}
+
+.card-content {
+    background: var(--card-content-background);
+    width: 230px;
+    height: 360px;
+}
+
+.card-title {
+    padding-left: 15px;
+}
+
+.card-img {
+    display: flex;
+    justify-content: center;
+}
+
+.card-img img {
+    width: 200px;
+    height: 140px;
+}
+
+.card-rarity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    margin-top: 10px;
+}
+
+.card-moves {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.common {
+    background: var(--card-background-common);
+}
+
+.rare {
+    background: var(--card-background-rare);
+}
+
+.epic {
+    background: var(--card-background-epic);
+}
+
+.legendary {
+    background: var(--card-background-legendary);
+}.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 250px;
+    height: 400px;
+    font-size: 10px;
+    color: var(--card-text-color);
+    margin: 20px;
+
+}
+
+.card-content {
+    background: var(--card-content-background);
+    width: 230px;
+    height: 360px;
+}
+
+.card-title {
+    padding-left: 15px;
+}
+
+.card-img {
+    display: flex;
+    justify-content: center;
+}
+
+.card-img img {
+    width: 200px;
+    height: 140px;
+}
+
+.card-rarity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    margin-top: 10px;
+}
+
+.card-moves {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.common {
+    background: var(--card-background-common);
+}
+
+.rare {
+    background: var(--card-background-rare);
+}
+
+.epic {
+    background: var(--card-background-epic);
+}
+
+.legendary {
+    background: var(--card-background-legendary);
+}

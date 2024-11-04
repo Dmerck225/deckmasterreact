@@ -1,0 +1,18 @@
+@import "../css/Root.css";
+
+#library-title {
+    text-align: center;
+}
+
+#search {
+    display: flex;
+    justify-content: center;
+    margin: 2%;
+}
+
+#library-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}

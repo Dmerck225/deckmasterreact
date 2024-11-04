@@ -1,0 +1,67 @@
+@import "../css/Root.css";
+
+#deck-builder-title {
+    text-align: center;
+}
+
+#deck-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.deck-container {
+    display: flex;
+    flex-direction: column;
+    flex: 50%;
+}
+
+#deck-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#deck-add {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+#deck-add-button{
+    height: 30px;
+    width: 100px;
+}
+
+#deck-search-cards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 17%;
+}
+
+#deck-section {
+    background: var(--secondary-background-color);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 10px;
+}
+
+#deck-title {
+    text-align: center;
+    margin-top: 5%;
+}
+
+#deck-title h3 {
+    margin-top: 0;
+}
+
+#deck-cards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 8%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 1%;
+    margin-right: 1%;
+}

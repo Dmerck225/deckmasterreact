@@ -1,0 +1,88 @@
+@import "../css/Root.css";
+
+#about-title {
+    text-align: center;
+}
+
+#about-content {
+    display: flex;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family:'Times New Roman', Times, serif;
+}
+
+#about {
+    display: flex;
+    flex: 50%;
+    flex-direction: column;
+    flex: 50%;
+    padding-right: 5%;
+    margin: 1%;
+    padding: 1%;
+    background: var(--secondary-background-color);
+}
+
+#meet-the-team {
+    margin-top: 40px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#meet-the-team img {
+    width: 100px;
+}
+
+#meet-the-team p {
+    margin: 0;
+}
+
+#faq {
+    flex: 50%;
+    margin: 1%;
+    padding: 1%;
+    background: var(--secondary-background-color);
+}
+
+#faq-lists {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1%;
+}
+
+#faq-lists h3 {
+    margin: 0;
+}
+
+#faq-lists ul {
+    list-style-type: none;
+}
+
+#faq-lists a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+#contact {
+    flex: 50%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-input p {
+    padding-right: 10px;
+}
+
+#contact-message {
+    width: 300px;
+    height: 75px;
+}
+
+#contact-button {
+    margin-top: 20px;
+}

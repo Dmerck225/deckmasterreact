@@ -4,6 +4,8 @@ const Footer = () => {
     return (
         <footer>
             <p>&copy; 2024 DeckMaster Archive. All rights reserved.</p>
-        </footer>
+        </footer> 
     );
 };
+
+export default Footer;

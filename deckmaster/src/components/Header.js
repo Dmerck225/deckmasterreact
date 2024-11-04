@@ -1,4 +1,5 @@
 import "../css/Header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
@@ -8,20 +9,10 @@ const Header = () => {
                 <h1>DeckMaster Archive</h1>
             </div>
             <div id="login">
-                <a href="login.html">Login</a>
+                <Link to="/Login">Login</Link>
             </div>
-            <nav id="main-nav">
-                <div id="toggle-nav">
-                    <div id="toggle-nav-triangle" className="triangle-up"></div>
-                </div>
-                <ul id="nav-items" class="hidden-small">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="cardLibrary.html">Card Library</a></li>
-                    <li><a href="deckBuilder.html">Deck Builder</a></li>
-                    <li><a href="aboutUs.html">About Us</a></li>
-                    <li><a href="deckMasterAdmin.html">DeckMaster Admin</a></li>
-                </ul>
-            </nav>
         </header>
     );
 };
+
+export default Header;

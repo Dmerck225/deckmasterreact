@@ -1,0 +1,10 @@
+@import "../css/Root.css";
+
+footer {
+    text-align: center;
+    background-color: var(--header-background-color);
+    color: var(--secondary-text-color);
+    padding:5px 0;
+    border-top: 1px solid var(--secondary-text-color);
+    margin-top: 50px;
+}
