@@ -1,0 +1,114 @@
+#admin-title {
+    text-align: center;
+    border-bottom: 1px solid var(--hover-color);
+    margin-right: 30%;
+    margin-left: 30%;
+    padding-bottom: 15px;
+}
+
+#secondary-admin-title {
+    text-align: center;
+    padding-top: 0;
+}
+
+#admin-search-button {
+    display: flex;
+    justify-content: center;
+}
+
+#admin-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+#admin-search-cards {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.admin-card {
+    padding-right: 5%;
+    margin-top: 10px;
+}
+
+#admin-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+#edit-button {
+    height: 30px;
+    width: 100px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#delete-button {
+    height: 30px;
+    width: 100px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#add-card-content {
+    background: var(--secondary-background-color);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 100%;
+    margin-top: 5%;
+    padding: 1%;
+    font-family:'Times New Roman', Times, serif;
+}
+
+#admin-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 5%;
+}
+
+.admin-input {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.admin-box {
+    margin-right: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1%;
+}
+
+.admin-input-box {
+    height: 30px;
+    width: 200px;
+    margin-left: 10px;
+}
+
+#input-description {
+    height: 100px
+}
+
+#add-button-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#add-button {
+    height: 50px;
+    width: 100px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#template-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

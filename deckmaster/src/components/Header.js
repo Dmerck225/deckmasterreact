@@ -1,11 +1,12 @@
 import "../css/Header.css";
 import { Link } from "react-router-dom";
+import Logo from "../images/DeckMasterArchive-logo.jpeg";
 
 const Header = () => {
     return (
         <header id="main-header">
             <div id="logo">
-                <img src="images/DeckMasterArchive-logo.jpeg" alt="DeckMaster Archive Logo"></img>
+                <img src={Logo} alt="DeckMaster Archive Logo"></img>
                 <h1>DeckMaster Archive</h1>
             </div>
             <div id="login">

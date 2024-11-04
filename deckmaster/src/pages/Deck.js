@@ -1,5 +1,12 @@
 import "../css/Deck.css";
 import "../css/Cards.css";
+import Shadow from "../images/shadow-assasin.jpeg";
+import Crimson from "../images/crimson-khight.jpeg";
+import Void from "../images/void-walker.jpeg";
+import Queen from "../images/ice-queen.jpeg";
+import Storm from "../images/storm-elemental.jpeg";
+import Phoenix from "../images/phoenix.jpeg";
+import Necromancer from "../images/Necromancer.jpeg";
 
 const Deck = () => {
     return (
@@ -20,7 +27,7 @@ const Deck = () => {
                                     <h1>Shadow Assassin</h1>
                                 </div>
                                 <div className="card-img">
-                                    <img src="images/shadow-assasin.jpeg" alt="shadow-assasin"></img>
+                                    <img src={Shadow} alt="shadow-assasin"></img>
                                 </div>
                                 <div className="card-rarity rare">
                                     <p>Rarity: Rare</p>
@@ -38,7 +45,7 @@ const Deck = () => {
                                     <h1>Crimson Knight</h1>
                                 </div>
                                 <div className="card-img">
-                                    <img src="images/crimson-khight.jpeg" alt="Crimson Knight"></img>
+                                    <img src={Crimson} alt="Crimson Knight"></img>
                                 </div>
                                 <div className="card-rarity epic">
                                     <p>Rarity: Epic</p>
@@ -56,7 +63,7 @@ const Deck = () => {
                                     <h1>Void Walker</h1>
                                 </div>
                                 <div className="card-img">
-                                    <img src="images/void-walker.jpeg" alt="Void Walker"></img>
+                                    <img src={Void} alt="Void Walker"></img>
                                 </div>
                                 <div class="card-rarity rare">
                                     <p>Rarity: Epic</p>
@@ -74,7 +81,7 @@ const Deck = () => {
                                     <h1>Ice Queen</h1>
                                 </div>
                                 <div className="card-img">
-                                    <img src="images/ice-queen.jpeg" alt="Ice Queen"></img>
+                                    <img src={Queen} alt="Ice Queen"></img>
                                 </div>
                                 <div className="card-rarity legendary">
                                     <p>Rarity: Legendary</p>
@@ -104,7 +111,7 @@ const Deck = () => {
                                     <h1>Storm Elemental</h1>
                                 </div>
                                 <div className="card-img">
-                                    <img src="images/storm-elemental.jpeg" alt="Storm Elemental"></img>
+                                    <img src={Storm} alt="Storm Elemental"></img>
                                 </div>
                                 <div className="card-rarity common">
                                     <p>Rarity: Common</p>
@@ -122,7 +129,7 @@ const Deck = () => {
                                     <h1>Phoenix Guardian</h1>
                                 </div>
                                 <div className="card-img">
-                                    <img src="images/phoenix.jpeg" alt="Phoenix"></img>
+                                    <img src={Phoenix} alt="Phoenix"></img>
                                 </div>
                                 <div className="card-rarity epic">
                                     <p>Rarity: Epic</p>
@@ -140,7 +147,7 @@ const Deck = () => {
                                     <h1>Necromancer</h1>
                                 </div>
                                 <div className="card-img">
-                                    <img src="images/Necromancer.jpeg" alt="Necromancer"></img>
+                                    <img src={Necromancer} alt="Necromancer"></img>
                                 </div>
                                 <div className="card-rarity epic">
                                     <p>Rarity: Rare</p>

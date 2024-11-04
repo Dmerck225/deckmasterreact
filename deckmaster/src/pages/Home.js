@@ -1,5 +1,12 @@
 import "../css/Home.css";
 import "../css/Cards.css";
+import Comp from "../images/competitive-play.avif";
+import Forest from "../images/whimsical-forest.jpg";
+import Hobbit from "../images/hobbit-update.jpeg";
+import New from "../images/new-cards.jpeg";
+import Thunder from "../images/thunder-golem.jpeg";
+import Queen from "../images/ice-queen.jpeg";
+import Phoenix from "../images/phoenix.jpeg";
 
 const Home = () => {
     return ( 
@@ -11,7 +18,7 @@ const Home = () => {
 
 
             <div id="home-img">
-                    <img src="images/whimsical-forest.jpg" alt="Whimsical Forest"></img>
+                    <img src={Forest} alt="Whimsical Forest"></img>
             </div>
 
 
@@ -36,7 +43,7 @@ const Home = () => {
                     <seciton id="news-cards" className="container">
                         <div className="news-card">
                             <section className="news-card-img">
-                                <img src="images/competitive-play.avif" alt="Competitive Play"></img>
+                                <img src={Comp} alt="Competitive Play"></img>
                             </section>
                             <section className="news-card-text">
                                 <h3>Competitive Play</h3>
@@ -45,7 +52,7 @@ const Home = () => {
                         </div>
                         <div className="news-card">
                             <section className="news-card-img">
-                                <img src="images/hobbit-update.jpeg" alt="Competitive Play"></img>
+                                <img src={Hobbit} alt="Competitive Play"></img>
                             </section>
                             <section className="news-card-text">
                                 <h3>New Hobbit Update!</h3>
@@ -54,7 +61,7 @@ const Home = () => {
                         </div>
                         <div className="news-card">
                             <section class="news-card-img">
-                                <img src="images/new-cards.jpeg" alt="new cards"></img>
+                                <img src={New} alt="new cards"></img>
                             </section>
                             <section className="news-card-text">
                                 <h3>New Cards</h3>
@@ -76,7 +83,7 @@ const Home = () => {
                                     <h1>Thunder Golem</h1>
                                 </div>
                                 <div className="card-img">
-                                    <img src="images/thunder-golem.jpeg" alt="Thunder Golem"></img>
+                                    <img src={Thunder} alt="Thunder Golem"></img>
                                 </div>
                                 <div className="card-rarity legendary">
                                     <p>Rarity: Legendary</p>
@@ -95,7 +102,7 @@ const Home = () => {
                                     <h1>Ice Queen</h1>
                                 </div>
                                 <div className="card-img">
-                                    <img src="images/ice-queen.jpeg" alt="Ice Queen"></img>
+                                    <img src={Queen} alt="Ice Queen"></img>
                                 </div>
                                 <div className="card-rarity legendary">
                                     <p>Rarity: Legendary</p>
@@ -114,7 +121,7 @@ const Home = () => {
                                     <h1>Phoenix Guardian</h1>
                                 </div>
                                 <div className="card-img">
-                                    <img src="images/phoenix.jpeg" alt="Phoenix"></img>
+                                    <img src={Phoenix} alt="Phoenix"></img>
                                 </div>
                                 <div className="card-rarity epic">
                                     <p>Rarity: Epic</p>

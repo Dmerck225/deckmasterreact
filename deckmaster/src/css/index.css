@@ -1,13 +1,53 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --header-background-color: black;
+  --main-background-color: linear-gradient(to right, #3c3b3f, #605c3c);
+  --secondary-background-color: #212125;
+  --hover-color: white;
+  --main-text-color: black;
+  --secondary-text-color: #C0C0C0;
+  --card-background-common: linear-gradient(to bottom, #bdc3c7, #2c3e50 );
+  --card-background-rare: linear-gradient(to bottom, #1CB5E0, #000046);
+  --card-background-legendary: linear-gradient(to bottom, #fd746c, #2c3e50);
+  --card-background-epic: linear-gradient(to bottom, #ff00cc, #333399);
+  --card-content-background: #eee7d7;
+  --card-text-color: black;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  background: var(--main-background-color);
+  font-family: luminari, fantasy;
+  color: var(--secondary-text-color);
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+      display: flex;
+      flex-direction: column;
+  }
+
+  #news-cards {
+      display: flex;
+      align-items: center;
+  }
+
+  #featured-cards-cards {
+      display: flex;
+      align-items: center;
+  }
+
+  #main-nav ul {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #toggle-nav {
+      display: none;
+  }
+
+  .hidden-small {
+      display: flex;
+      justify-content: center;
+  }
 }

@@ -1,5 +1,3 @@
-@import "../css/Root.css";
-
 #main-header {
     background: var(--header-background-color);
     color: var(--secondary-text-color);

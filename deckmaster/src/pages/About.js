@@ -1,4 +1,5 @@
 import "../css/About.css";
+import Me from "../images/ai-photo-of-me.jpg";
 
 const About = () => {
     return (
@@ -13,7 +14,7 @@ const About = () => {
                     </section>
                     <seciton id="meet-the-team">
                         <h3>Meet The Team</h3>
-                        <img src="images/1727052101721.jpg" alt="team-member1"></img>
+                        <img src={Me} alt="team-member1"></img>
                         <p>Developer: Dreyton Merck</p>
                     </seciton>
                 </div>
