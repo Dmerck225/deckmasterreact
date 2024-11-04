@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/deckmasterreact/static/css/main.d4422e0b.css",
+    "main.js": "/deckmasterreact/static/js/main.26835215.js",
+    "static/media/whimsical-forest.jpg": "/deckmasterreact/static/media/whimsical-forest.a6c12546b993a0464434.jpg",
+    "static/media/hobbit-update.jpeg": "/deckmasterreact/static/media/hobbit-update.48348fe67ede42ec4ff8.jpeg",
+    "static/media/competitive-play.avif": "/deckmasterreact/static/media/competitive-play.6b79e5e6130f5abffe0b.avif",
+    "static/media/ai-photo-of-me.jpg": "/deckmasterreact/static/media/ai-photo-of-me.8babc0fc3c6962145354.jpg",
+    "index.html": "/deckmasterreact/index.html",
+    "main.d4422e0b.css.map": "/deckmasterreact/static/css/main.d4422e0b.css.map",
+    "main.26835215.js.map": "/deckmasterreact/static/js/main.26835215.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d4422e0b.css",
+    "static/js/main.26835215.js"
+  ]
+}
