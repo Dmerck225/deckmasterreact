@@ -9,7 +9,7 @@ const Library = () => {
 
     useEffect(() => {
         (async () => {
-            const response = await axios.get("http://localhost:3000/api/cards");
+            const response = await axios.get("https://deckmaster-backend.onrender.com/api/cards");
             setCards(response.data);
         })();
     }, []);
