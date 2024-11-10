@@ -1,13 +1,20 @@
 import { Outlet, Link } from "react-router-dom";
+import { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./css/Nav.css";
 
 const Layout = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => setMenuOpen(!menuOpen);
+    
     return (
         <>
             <Header />
-            <nav id="main-nav">
+            <div className={menuOpen ? "triangle-up" : "triangle-down"} onClick={toggleMenu}></div>
+
+            <nav id="main-nav" className={menuOpen ? "hidden" : ""}>
                 <ul id="nav-items">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/Library">Card Library</Link></li>

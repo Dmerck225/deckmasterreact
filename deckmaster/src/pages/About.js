@@ -1,5 +1,6 @@
 import "../css/About.css";
 import Me from "../images/ai-photo-of-me.jpg";
+import Feedback from "../components/Feedback";
 
 const About = () => {
     return (
@@ -48,20 +49,7 @@ const About = () => {
             </div>
 
             <div id="contact">
-                <p>Have a question or feedback? Feel free to reach out!</p>
-                <div class="contact-input">
-                    <p>Name</p>
-                    <input type="text" placeholder="Enter Name"></input>
-                </div>
-                <div class="contact-input">
-                    <p>Email</p>
-                    <input type="text" placeholder="Enter Email"></input>
-                </div>
-                <div class="contact-input">
-                    <p>Message</p>
-                    <input type="text" id="contact-message" placeholder="Enter Message"></input>
-                </div>
-                <button id="contact-button">Submit</button>
+                <Feedback />
             </div>
         </>
     );

@@ -25,3 +25,29 @@
     color: var(--hover-color);
     border-bottom: 1px solid var(--hover-color);
 }
+
+.hidden {
+    display: none;
+}
+
+.hidden-small {
+    display: none;
+}
+
+.triangle-up {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent; 
+    border-bottom: 10px solid black;
+    margin-left: 10%;
+}
+
+.triangle-down {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid black;
+    margin-left: 10%;
+  }
