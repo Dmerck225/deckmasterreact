@@ -8,7 +8,7 @@ import Thunder from "../images/thunder-golem.jpeg";
 import Queen from "../images/ice-queen.jpeg";
 import Phoenix from "../images/phoenix.jpeg";
 import NewsCard from "../components/NewsCard";
-import Card from "../components/Card";
+import FeaturedCard from "../components/FeaturedCard";
 
 const Home = () => {
     return ( 
@@ -19,7 +19,7 @@ const Home = () => {
             </div>
 
             <div id="home-img">
-                <img src={Forest} alt="Whimsical Forest"></img>
+                <img src={Forest} alt="Whimsical Forest" />
             </div>
 
             <div id="home-arrows">
@@ -66,32 +66,26 @@ const Home = () => {
                         <p>Discover some of the most powerful and exciting cards in the DeckMaster Archive! ...</p>
                     </section>
                     <section id="featured-cards-cards" className="container">
-                        <Card 
-                            title="Thunder Golem" 
-                            image={Thunder} 
-                            rarity="Legendary" 
-                            moves={[
-                                "ThunderStorm Blast: Upon entering the battlefield, Thunder Golem deals 30 damage to all enemy creatures.",
-                                "Electric Shield: Reduces incoming damage by 20% from all sources. This move reflects the golem's natural defense, absorbing and dispersing energy from attacks."
-                            ]}
+                        <FeaturedCard 
+                            title="Thunder Golem"
+                            image={Thunder}
+                            alt="Thunder Golem"
+                            rarity="Legendary"
+                            moves={["ThunderStorm Blast: Upon entering the battlefield, Thunder Golem deals 30 damage to all enemy creatures.", "Electric Shield: Reduces incoming damage by 20% from all sources. This move reflects the golem's natural defense, absorbing and dispersing energy from attacks."]}
                         />
-                        <Card 
-                            title="Ice Queen" 
-                            image={Queen} 
-                            rarity="Legendary" 
-                            moves={[
-                                "Frozen Touch: Freezes an enemy creature, preventing it from attacking for one turn.",
-                                "Blizzard Call: Deals 40 damage to all enemies and reduces their attack by 10 for two turns."
-                            ]}
+                        <FeaturedCard 
+                        title="Ice Queen"
+                        image={Queen}
+                        alt="Ice Queen"
+                        rarity="Legendary"
+                        moves={["Frozen Touch: Freezes an enemy creature, preventing it from attacking for one turn.", "Blizzard Call: Deals 40 damage to all enemies and reduces their attack by 10 for two turns."]}
                         />
-                        <Card 
-                            title="Phoenix Guardian" 
-                            image={Phoenix} 
-                            rarity="Epic" 
-                            moves={[
-                                "Rebirth: Once per game, resurrects after being destroyed with half health.",
-                                "Flame Wings: Deals 50 damage to an enemy and burns them for 10 damage over time."
-                            ]}
+                        <FeaturedCard 
+                        title="Phoenix Guardian"
+                        image={Phoenix}
+                        alt="Phoenix Guardian"
+                        rarity="Epic"
+                        moves={["Rebirth: Once per game, resurrects after being destroyed with half health.", "Flame Wings: Deals 50 damage to an enemy and burns them for 10 damage over time."]}
                         />
                     </section>
                 </div>
