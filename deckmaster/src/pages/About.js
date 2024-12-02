@@ -7,7 +7,7 @@ const About = () => {
         <>
             <h1 id="about-title" >About Us</h1>
 
-            <div id="about-content" class="container">
+            <div id="about-content" className="container">
                 <div id="about">
                     <section id="about-description">
                         <h1>About DeckMaster Archive</h1>

@@ -65,7 +65,7 @@ const Deck = () => {
                                 <div className="card-img">
                                     <img src={Void} alt="Void Walker"></img>
                                 </div>
-                                <div class="card-rarity rare">
+                                <div className="card-rarity rare">
                                     <p>Rarity: Epic</p>
                                 </div>
                                 <div className="card-moves">
@@ -98,7 +98,7 @@ const Deck = () => {
                         <button id="deck-add-button" >Add Card</button>
                     </seciton>    
                 </div>
-                <div id="deck-section" classNameName="deck-container">
+                <div id="deck-section" className="deck-container">
                     <section id="deck-title">
                         <h3>Deck Name</h3>
                         <p>Deck 1</p>
@@ -124,7 +124,7 @@ const Deck = () => {
                         </div>
 
                         <div className="card-container epic">
-                            <div classNameName="card-content">
+                            <div className="card-content">
                                 <div className="card-title">
                                     <h1>Phoenix Guardian</h1>
                                 </div>

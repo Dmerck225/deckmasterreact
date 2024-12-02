@@ -23,8 +23,16 @@ const Admin = () => {
     };
 
     const handleAddCard = async () => {
+        const backendUrl = "https://deckmaster-backend.onrender.com";
+        console.log("Card Data being sent:", {
+            ...cardData,
+            attack: parseInt(cardData.attack),
+            defense: parseInt(cardData.defense),
+            abilities: cardData.abilities.split(",").map((ability) => ability.trim()),
+        });
+    
         try {
-            const response = await fetch("/api/cards", {
+            const response = await fetch(`${backendUrl}/api/cards`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -36,7 +44,7 @@ const Admin = () => {
                     abilities: cardData.abilities.split(",").map((ability) => ability.trim()),
                 }),
             });
-
+    
             if (response.ok) {
                 alert("Card added successfully!");
                 setCardData({
@@ -105,9 +113,30 @@ const Admin = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="card-container rare">
+                            <div className="card-content">
+                                <div className="card-title">
+                                    <h1>Shadow Assassin</h1>
+                                </div>
+                                <div className="card-img">
+                                    <img src={Shadow} alt="shadow-assasin"></img>
+                                </div>
+                                <div className="card-rarity rare">
+                                    <p>Rarity: Rare</p>
+                                </div>
+                                <div className="card-moves">
+                                    <p>Stealth Strike: Shadow Assassin can attack directly, bypassing defenses, once per turn. This allows it to deal damage without being blocked or countered by other creatures.</p>
+                                    <p>Evasive Maneuver: Shadow Assassin has a 50% chance to completely avoid incoming attacks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="admin-buttons">
+                        <button id="edit-button">Edit</button>
+                        <button id="delete-button">Delete</button>
                     </section>
                 </div>
-        
+
                 <div id="add-card-content">
                     <h2>Add Card</h2>
                     <div id="admin-container" className="container">
@@ -214,6 +243,29 @@ const Admin = () => {
                             </button>
                         </section>
                     </div>
+                </div>
+                <div id="template-card-container">
+
+                    <h3>Template Card: </h3>
+                    
+                    <div className="card-container common">
+                        <div className="card-content">
+                            <div className="card-title">
+                                <h1>Card Name</h1>
+                            </div>
+                            <div className="card-img">
+                                <img src="https://placehold.co/400x200" alt="placeholder"></img>
+                            </div>
+                            <div className="card-rarity common">
+                                <p>Rarity:</p>
+                            </div>
+                            <div className="card-moves">
+                                <p>Special Ability 1</p>
+                                <p>Special Ability 2</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>
