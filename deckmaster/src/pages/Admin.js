@@ -1,9 +1,6 @@
 import "../css/Admin.css";
 import "../css/Cards.css";
 import { useState, useEffect } from "react";
-import Shadow from "../images/shadow-assasin.jpeg";
-import Phoenix from "../images/phoenix.jpeg";
-import Thunder from "../images/thunder-golem.jpeg";
 
 const Admin = () => {
     const [cardData, setCardData] = useState({
@@ -19,13 +16,15 @@ const Admin = () => {
 
     const [cards, setCards] = useState([]);
     const [error, setError] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [editMode, setEditMode] = useState(false);
+    const [currentCardId, setCurrentCardId] = useState(null);
 
-    const backendUrl = "https://deckmaster-backend.onrender.com";
+    const backendUrl = "https://deckmaster-backend.onrender.com"; // Replace with your actual backend URL if different
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setCardData({ ...cardData, [name]: value });
-    };
+    useEffect(() => {
+        fetchCards();
+    }, []);
 
     const fetchCards = async () => {
         try {
@@ -41,10 +40,14 @@ const Admin = () => {
         }
     };
 
-    const handleAddCard = async () => {
-        setError(""); // Clear previous errors
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setCardData({ ...cardData, [name]: value });
+    };
 
-        // Client-side validation
+    const handleAddCard = async () => {
+        setError("");
+
         if (!cardData.name || !cardData.cardType || !cardData.rarity || !cardData.description || !cardData.attack || !cardData.defense || !cardData.abilities || !cardData.img_name) {
             setError("All fields are required!");
             return;
@@ -72,7 +75,7 @@ const Admin = () => {
             });
 
             if (response.ok) {
-                alert("Card added successfully!");
+                setSuccessMessage("Card added successfully!");
                 setCardData({
                     name: "",
                     cardType: "",
@@ -83,7 +86,7 @@ const Admin = () => {
                     abilities: "",
                     img_name: "",
                 });
-                fetchCards(); // Update the card list
+                fetchCards();
             } else {
                 const message = await response.text();
                 setError(message);
@@ -94,199 +97,271 @@ const Admin = () => {
         }
     };
 
-    useEffect(() => {
-        fetchCards();
-    }, []);
+    const handleEditClick = (card) => {
+        setEditMode(true);
+        setCurrentCardId(card._id);
+        setCardData({
+            name: card.name,
+            cardType: card.cardType,
+            rarity: card.rarity,
+            description: card.description,
+            attack: card.attack,
+            defense: card.defense,
+            abilities: card.abilities.join(", "),
+            img_name: card.img_name,
+        });
+    };
+
+    const handleEditCard = async () => {
+        setError("");
+
+        if (!cardData.name || !cardData.cardType || !cardData.rarity || !cardData.description || !cardData.attack || !cardData.defense || !cardData.abilities || !cardData.img_name) {
+            setError("All fields are required!");
+            return;
+        }
+
+        if (isNaN(cardData.attack) || isNaN(cardData.defense)) {
+            setError("Attack and Defense must be numbers!");
+            return;
+        }
+
+        const formattedCardData = {
+            ...cardData,
+            attack: parseInt(cardData.attack),
+            defense: parseInt(cardData.defense),
+            abilities: cardData.abilities.split(",").map((ability) => ability.trim()),
+        };
+
+        if (!currentCardId) {
+            setError("No card selected for editing.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${backendUrl}/api/cards/${currentCardId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formattedCardData),
+            });
+
+            if (response.ok) {
+                setSuccessMessage("Card updated successfully!");
+                fetchCards();
+                setEditMode(false);
+                setCurrentCardId(null);
+                setCardData({
+                    name: "",
+                    cardType: "",
+                    rarity: "",
+                    description: "",
+                    attack: "",
+                    defense: "",
+                    abilities: "",
+                    img_name: "",
+                });
+            } else {
+                const message = await response.text();
+                setError(message);
+            }
+        } catch (error) {
+            console.error("Error editing card:", error);
+            setError("An unexpected error occurred while editing the card.");
+        }
+    };
+
+    const handleDeleteCard = async (cardId) => {
+        if (window.confirm("Are you sure you want to delete this card?")) {
+            try {
+                const response = await fetch(`${backendUrl}/api/cards/${cardId}`, {
+                    method: "DELETE",
+                });
+
+                if (response.ok) {
+                    setCards(cards.filter(card => card._id !== cardId));
+                    setSuccessMessage("Card deleted successfully!");
+                } else {
+                    const message = await response.text();
+                    setError(message);
+                }
+            } catch (error) {
+                console.error("Error deleting card:", error);
+                setError("An unexpected error occurred while deleting the card.");
+            }
+        }
+    };
 
     return (
         <>
-        <h1 id="admin-title">DeckMaster Admin</h1>
-        <h2 id="secondary-admin-title">Card Management</h2>
-        <div id="admin-content">
-            {/* Existing Search and Card Display */}
-            <div id="admin-search-button">
-                <button>Search</button>
-                <input type="text" placeholder="Search for a card"></input>
-            </div>
-            <div id="admin-search">
-                <section id="admin-search-cards">
-                    {/* Example cards */}
-                    <div className="card-container epic">
-                        <div className="card-content">
-                            <div className="card-title">
-                                <h1>Phoenix Guardian</h1>
-                            </div>
-                            <div className="card-img">
-                                <img src={Phoenix} alt="Phoenix"></img>
-                            </div>
-                            <div className="card-rarity epic">
-                                <p>Rarity: Epic</p>
-                            </div>
-                            <div className="card-moves">
-                                <p>Rebirth: Once per game, resurrects after being destroyed with half health.</p>
-                                <p>Flame Wings: Deals 50 damage to an enemy and burns them for 10 damage over time.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="card-container legendary">
-                        <div className="card-content">
-                            <div className="card-title">
-                                <h1>Thunder Golem</h1>
-                            </div>
-                            <div className="card-img">
-                                <img src={Thunder} alt="Thunder Golem"></img>
-                            </div>
-                            <div className="card-rarity legendary">
-                                <p>Rarity: Legendary</p>
-                            </div>
-                            <div className="card-moves">
-                                <p>ThunderStorm Blast:  Upon entering the battlefield, Thunder Golem deals 30 damage to all enemy creatures.</p>
-                                <p>Electric Shield: Reduces incoming damage by 20% from all sources.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="card-container rare">
-                        <div className="card-content">
-                            <div className="card-title">
-                                <h1>Shadow Assassin</h1>
-                            </div>
-                            <div className="card-img">
-                                <img src={Shadow} alt="shadow-assasin"></img>
-                            </div>
-                            <div className="card-rarity rare">
-                                <p>Rarity: Rare</p>
-                            </div>
-                            <div className="card-moves">
-                                <p>Stealth Strike: Shadow Assassin can attack directly, bypassing defenses, once per turn. This allows it to deal damage without being blocked or countered by other creatures.</p>
-                                <p>Evasive Maneuver: Shadow Assassin has a 50% chance to completely avoid incoming attacks.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
+            <h1 id="admin-title">DeckMaster Admin</h1>
+            <h2 id="secondary-admin-title">Card Management</h2>
 
-            <div id="add-card-content">
-                <h2>Add Card</h2>
-                <div id="admin-container" className="container">
-                    <section className="admin-box">
-                        <h3>Basic Information</h3>
-                        <div className="admin-input">
-                            <p>Name</p>
-                            <input
-                                className="admin-input-box"
-                                type="text"
-                                name="name"
-                                value={cardData.name}
-                                onChange={handleInputChange}
-                                placeholder="Enter Name"
-                                required
-                            />
-                        </div>
-                        <div className="admin-input">
-                            <p>Card Type</p>
-                            <input
-                                className="admin-input-box"
-                                type="text"
-                                name="cardType"
-                                value={cardData.cardType}
-                                onChange={handleInputChange}
-                                placeholder="Enter Type"
-                                required
-                            />
-                        </div>
-                    </section>
-                    <section className="admin-box">
-                        <h3>Card Details</h3>
-                        <div className="admin-input">
-                            <p>Rarity</p>
-                            <select
-                                className="admin-input-box"
-                                name="rarity"
-                                value={cardData.rarity}
-                                onChange={handleInputChange}
-                                required
-                            >
-                                <option value="">Select Rarity</option>
-                                <option value="Common">Common</option>
-                                <option value="Rare">Rare</option>
-                                <option value="Epic">Epic</option>
-                                <option value="Legendary">Legendary</option>
-                            </select>
-                        </div>
-                        <div className="admin-input">
-                            <p>Description</p>
-                            <textarea
-                                id="input-description"
-                                className="admin-input-box"
-                                name="description"
-                                value={cardData.description}
-                                onChange={handleInputChange}
-                                placeholder="Enter Description"
-                                required
-                            />
-                        </div>
-                    </section>
-                    <section className="admin-box">
-                        <h3>Attributes</h3>
-                        <div className="admin-input">
-                            <p>Attack</p>
-                            <input
-                                className="admin-input-box"
-                                type="number"
-                                name="attack"
-                                value={cardData.attack}
-                                onChange={handleInputChange}
-                                placeholder="Enter Attack Stats"
-                                required
-                            />
-                        </div>
-                        <div className="admin-input">
-                            <p>Defense</p>
-                            <input
-                                className="admin-input-box"
-                                type="number"
-                                name="defense"
-                                value={cardData.defense}
-                                onChange={handleInputChange}
-                                placeholder="Enter Defense Stats"
-                                required
-                            />
-                        </div>
-                    </section>
-                    <section className="admin-box">
-                        <h3>Abilities</h3>
-                        <div className="admin-input">
-                            <p>Abilities</p>
-                            <textarea
-                                className="admin-input-box"
-                                name="abilities"
-                                value={cardData.abilities}
-                                onChange={handleInputChange}
-                                placeholder="Enter Abilities (comma-separated)"
-                                required
-                            />
-                        </div>
-                        <div className="admin-input">
-                            <p>Image URL</p>
-                            <input
-                                className="admin-input-box"
-                                type="url"
-                                name="img_name"
-                                value={cardData.img_name}
-                                onChange={handleInputChange}
-                                placeholder="Enter Image URL"
-                                required
-                            />
-                        </div>
-                    </section>
+            {/* Display error and success messages */}
+            {error && <div className="error-message">{error}</div>}
+            {successMessage && <div className="success-message">{successMessage}</div>}
 
-                    <button className="submit-btn" onClick={handleAddCard}>
-                        Submit Card
-                    </button>
-                    {error && <p className="error-message">{error}</p>}
+            <div id="admin-content">
+                {/* Search bar */}
+                <div id="admin-search-button">
+                    <button>Search</button>
+                    <input type="text" placeholder="Search for a card" />
+                </div>
+
+                {/* Display the cards */}
+                <div id="admin-search">
+                    <section id="admin-search-cards">
+                        {cards.map((card) => (
+                            <div key={card._id} className={`card-container ${card.rarity.toLowerCase()}`}>
+                                <div className="card-content">
+                                    <div className="card-title">
+                                        <h1>{card.name}</h1>
+                                    </div>
+                                    <div className="card-img">
+                                        <img src={card.img_name} alt={card.name} />
+                                    </div>
+                                    <div className="card-rarity">
+                                        <p>Rarity: {card.rarity}</p>
+                                    </div>
+                                    <div className="card-moves">
+                                        <p>{card.description}</p>
+                                    </div>
+                                    <div className="card-actions">
+                                        <button onClick={() => handleEditClick(card)}>Edit</button>
+                                        <button onClick={() => handleDeleteCard(card._id)}>Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </section>
+                </div>
+
+                {/* Add/Edit Card Form */}
+                <div id="add-card-content">
+                    <h2>{editMode ? "Edit Card" : "Add New Card"}</h2>
+                    <div id="admin-container" className="container">
+                        <section className="admin-box">
+                            <h3>Basic Information</h3>
+                            <div className="admin-input">
+                                <p>Name</p>
+                                <input
+                                    className="admin-input-box"
+                                    type="text"
+                                    name="name"
+                                    value={cardData.name}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter Name"
+                                    required
+                                />
+                            </div>
+                            <div className="admin-input">
+                                <p>Card Type</p>
+                                <input
+                                    className="admin-input-box"
+                                    type="text"
+                                    name="cardType"
+                                    value={cardData.cardType}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter Type"
+                                    required
+                                />
+                            </div>
+                        </section>
+                        <section className="admin-box">
+                            <h3>Card Details</h3>
+                            <div className="admin-input">
+                                <p>Rarity</p>
+                                <select
+                                    className="admin-input-box"
+                                    name="rarity"
+                                    value={cardData.rarity}
+                                    onChange={handleInputChange}
+                                    required
+                                >
+                                    <option value="">Select Rarity</option>
+                                    <option value="Common">Common</option>
+                                    <option value="Rare">Rare</option>
+                                    <option value="Epic">Epic</option>
+                                    <option value="Legendary">Legendary</option>
+                                </select>
+                            </div>
+                            <div className="admin-input">
+                                <p>Description</p>
+                                <textarea
+                                    id="input-description"
+                                    className="admin-input-box"
+                                    name="description"
+                                    value={cardData.description}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter Description"
+                                    required
+                                />
+                            </div>
+                        </section>
+                        <section className="admin-box">
+                            <h3>Stats</h3>
+                            <div className="admin-input">
+                                <p>Attack</p>
+                                <input
+                                    className="admin-input-box"
+                                    type="number"
+                                    name="attack"
+                                    value={cardData.attack}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter Attack"
+                                    required
+                                />
+                            </div>
+                            <div className="admin-input">
+                                <p>Defense</p>
+                                <input
+                                    className="admin-input-box"
+                                    type="number"
+                                    name="defense"
+                                    value={cardData.defense}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter Defense"
+                                    required
+                                />
+                            </div>
+                            <div className="admin-input">
+                                <p>Abilities</p>
+                                <input
+                                    className="admin-input-box"
+                                    type="text"
+                                    name="abilities"
+                                    value={cardData.abilities}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter Abilities (comma separated)"
+                                    required
+                                />
+                            </div>
+                            <div className="admin-input">
+                                <p>Image URL</p>
+                                <input
+                                    className="admin-input-box"
+                                    type="text"
+                                    name="img_name"
+                                    value={cardData.img_name}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter Image URL"
+                                    required
+                                />
+                            </div>
+                        </section>
+                        <div className="card-actions">
+                            {editMode ? (
+                                <>
+                                    <button onClick={handleEditCard}>Save Changes</button>
+                                    <button onClick={() => setEditMode(false)}>Cancel</button>
+                                </>
+                            ) : (
+                                <button onClick={handleAddCard}>Add Card</button>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     );
 };

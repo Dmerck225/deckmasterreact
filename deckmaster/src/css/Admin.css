@@ -66,9 +66,10 @@
 
 #admin-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     margin-bottom: 5%;
+    max-width: 100%;
 }
 
 .admin-input {
