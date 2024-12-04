@@ -20,7 +20,7 @@ const Admin = () => {
     const [editMode, setEditMode] = useState(false);
     const [currentCardId, setCurrentCardId] = useState(null);
 
-    const backendUrl = "https://deckmaster-backend.onrender.com"; // Replace with your actual backend URL if different
+    const backendUrl = "https://deckmaster-backend.onrender.com"; 
 
     useEffect(() => {
         fetchCards();
@@ -47,24 +47,24 @@ const Admin = () => {
 
     const handleAddCard = async () => {
         setError("");
-
+    
         if (!cardData.name || !cardData.cardType || !cardData.rarity || !cardData.description || !cardData.attack || !cardData.defense || !cardData.abilities || !cardData.img_name) {
             setError("All fields are required!");
             return;
         }
-
+    
         if (isNaN(cardData.attack) || isNaN(cardData.defense)) {
             setError("Attack and Defense must be numbers!");
             return;
         }
-
+    
         const formattedCardData = {
             ...cardData,
             attack: parseInt(cardData.attack),
             defense: parseInt(cardData.defense),
             abilities: cardData.abilities.split(",").map((ability) => ability.trim()),
         };
-
+    
         try {
             const response = await fetch(`${backendUrl}/api/cards`, {
                 method: "POST",
@@ -73,8 +73,9 @@ const Admin = () => {
                 },
                 body: JSON.stringify(formattedCardData),
             });
-
+    
             if (response.ok) {
+                const newCard = await response.json();  
                 setSuccessMessage("Card added successfully!");
                 setCardData({
                     name: "",
@@ -86,7 +87,9 @@ const Admin = () => {
                     abilities: "",
                     img_name: "",
                 });
-                fetchCards();
+    
+                setCards([...cards, newCard]);  // Append the new card to the existing list
+    
             } else {
                 const message = await response.text();
                 setError(message);
@@ -197,18 +200,15 @@ const Admin = () => {
             <h1 id="admin-title">DeckMaster Admin</h1>
             <h2 id="secondary-admin-title">Card Management</h2>
 
-            {/* Display error and success messages */}
             {error && <div className="error-message">{error}</div>}
             {successMessage && <div className="success-message">{successMessage}</div>}
 
             <div id="admin-content">
-                {/* Search bar */}
                 <div id="admin-search-button">
                     <button>Search</button>
                     <input type="text" placeholder="Search for a card" />
                 </div>
 
-                {/* Display the cards */}
                 <div id="admin-search">
                     <section id="admin-search-cards">
                         {cards.map((card) => (
@@ -236,7 +236,6 @@ const Admin = () => {
                     </section>
                 </div>
 
-                {/* Add/Edit Card Form */}
                 <div id="add-card-content">
                     <h2>{editMode ? "Edit Card" : "Add New Card"}</h2>
                     <div id="admin-container" className="container">
@@ -287,9 +286,9 @@ const Admin = () => {
                             </div>
                             <div className="admin-input">
                                 <p>Description</p>
-                                <textarea
-                                    id="input-description"
+                                <input
                                     className="admin-input-box"
+                                    type="text"
                                     name="description"
                                     value={cardData.description}
                                     onChange={handleInputChange}
@@ -299,12 +298,12 @@ const Admin = () => {
                             </div>
                         </section>
                         <section className="admin-box">
-                            <h3>Stats</h3>
+                            <h3>Card Stats</h3>
                             <div className="admin-input">
                                 <p>Attack</p>
                                 <input
                                     className="admin-input-box"
-                                    type="number"
+                                    type="text"
                                     name="attack"
                                     value={cardData.attack}
                                     onChange={handleInputChange}
@@ -316,7 +315,7 @@ const Admin = () => {
                                 <p>Defense</p>
                                 <input
                                     className="admin-input-box"
-                                    type="number"
+                                    type="text"
                                     name="defense"
                                     value={cardData.defense}
                                     onChange={handleInputChange}
@@ -325,17 +324,20 @@ const Admin = () => {
                                 />
                             </div>
                             <div className="admin-input">
-                                <p>Abilities</p>
+                                <p>Abilities (comma separated)</p>
                                 <input
                                     className="admin-input-box"
                                     type="text"
                                     name="abilities"
                                     value={cardData.abilities}
                                     onChange={handleInputChange}
-                                    placeholder="Enter Abilities (comma separated)"
+                                    placeholder="Enter Abilities"
                                     required
                                 />
                             </div>
+                        </section>
+                        <section className="admin-box">
+                            <h3>Card Image</h3>
                             <div className="admin-input">
                                 <p>Image URL</p>
                                 <input
@@ -349,16 +351,12 @@ const Admin = () => {
                                 />
                             </div>
                         </section>
-                        <div className="card-actions">
-                            {editMode ? (
-                                <>
-                                    <button onClick={handleEditCard}>Save Changes</button>
-                                    <button onClick={() => setEditMode(false)}>Cancel</button>
-                                </>
-                            ) : (
-                                <button onClick={handleAddCard}>Add Card</button>
-                            )}
-                        </div>
+                    </div>
+
+                    <div id="admin-actions">
+                        <button className="admin-action-btn" onClick={editMode ? handleEditCard : handleAddCard}>
+                            {editMode ? "Update Card" : "Add Card"}
+                        </button>
                     </div>
                 </div>
             </div>
