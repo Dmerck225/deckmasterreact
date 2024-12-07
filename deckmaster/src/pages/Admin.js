@@ -20,7 +20,7 @@ const Admin = () => {
     const [editMode, setEditMode] = useState(false);
     const [currentCardId, setCurrentCardId] = useState(null);
 
-    const backendUrl = "https://deckmaster-backend.onrender.com"; 
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || "https://deckmaster-backend.onrender.com";  // Dynamic URL
 
     useEffect(() => {
         fetchCards();
@@ -31,12 +31,19 @@ const Admin = () => {
             const response = await fetch(`${backendUrl}/api/cards`);
             if (response.ok) {
                 const data = await response.json();
-                setCards(data);
+
+                // Ensure every card has a valid rarity field
+                const sanitizedCards = data.map((card) => ({
+                    ...card,
+                    rarity: card.rarity || 'Unknown', // Fallback to 'Unknown' if rarity is missing
+                }));
+
+                setCards(sanitizedCards);
             } else {
-                console.error("Failed to fetch cards");
+                setError("Failed to fetch cards");
             }
         } catch (err) {
-            console.error("Error fetching cards:", err);
+            setError("Error fetching cards: " + err.message);
         }
     };
 
@@ -47,24 +54,24 @@ const Admin = () => {
 
     const handleAddCard = async () => {
         setError("");
-    
+
         if (!cardData.name || !cardData.cardType || !cardData.rarity || !cardData.description || !cardData.attack || !cardData.defense || !cardData.abilities || !cardData.img_name) {
             setError("All fields are required!");
             return;
         }
-    
+
         if (isNaN(cardData.attack) || isNaN(cardData.defense)) {
             setError("Attack and Defense must be numbers!");
             return;
         }
-    
+
         const formattedCardData = {
             ...cardData,
             attack: parseInt(cardData.attack),
             defense: parseInt(cardData.defense),
             abilities: cardData.abilities.split(",").map((ability) => ability.trim()),
         };
-    
+
         try {
             const response = await fetch(`${backendUrl}/api/cards`, {
                 method: "POST",
@@ -73,9 +80,9 @@ const Admin = () => {
                 },
                 body: JSON.stringify(formattedCardData),
             });
-    
+
             if (response.ok) {
-                const newCard = await response.json();  
+                const newCard = await response.json();
                 setSuccessMessage("Card added successfully!");
                 setCardData({
                     name: "",
@@ -87,15 +94,13 @@ const Admin = () => {
                     abilities: "",
                     img_name: "",
                 });
-    
-                setCards([...cards, newCard]);  // Append the new card to the existing list
-    
+
+                setCards([...cards, newCard]);  // Append new card
             } else {
                 const message = await response.text();
                 setError(message);
             }
         } catch (error) {
-            console.error("Error adding card:", error);
             setError("An unexpected error occurred while adding the card.");
         }
     };
@@ -169,7 +174,6 @@ const Admin = () => {
                 setError(message);
             }
         } catch (error) {
-            console.error("Error editing card:", error);
             setError("An unexpected error occurred while editing the card.");
         }
     };
@@ -189,7 +193,6 @@ const Admin = () => {
                     setError(message);
                 }
             } catch (error) {
-                console.error("Error deleting card:", error);
                 setError("An unexpected error occurred while deleting the card.");
             }
         }
@@ -286,9 +289,8 @@ const Admin = () => {
                             </div>
                             <div className="admin-input">
                                 <p>Description</p>
-                                <input
+                                <textarea
                                     className="admin-input-box"
-                                    type="text"
                                     name="description"
                                     value={cardData.description}
                                     onChange={handleInputChange}
@@ -298,12 +300,12 @@ const Admin = () => {
                             </div>
                         </section>
                         <section className="admin-box">
-                            <h3>Card Stats</h3>
+                            <h3>Stats</h3>
                             <div className="admin-input">
                                 <p>Attack</p>
                                 <input
                                     className="admin-input-box"
-                                    type="text"
+                                    type="number"
                                     name="attack"
                                     value={cardData.attack}
                                     onChange={handleInputChange}
@@ -315,7 +317,7 @@ const Admin = () => {
                                 <p>Defense</p>
                                 <input
                                     className="admin-input-box"
-                                    type="text"
+                                    type="number"
                                     name="defense"
                                     value={cardData.defense}
                                     onChange={handleInputChange}
@@ -323,21 +325,21 @@ const Admin = () => {
                                     required
                                 />
                             </div>
+                        </section>
+                        <section className="admin-box">
+                            <h3>Abilities</h3>
                             <div className="admin-input">
-                                <p>Abilities (comma separated)</p>
+                                <p>Abilities</p>
                                 <input
                                     className="admin-input-box"
                                     type="text"
                                     name="abilities"
                                     value={cardData.abilities}
                                     onChange={handleInputChange}
-                                    placeholder="Enter Abilities"
+                                    placeholder="Enter Abilities (comma separated)"
                                     required
                                 />
                             </div>
-                        </section>
-                        <section className="admin-box">
-                            <h3>Card Image</h3>
                             <div className="admin-input">
                                 <p>Image URL</p>
                                 <input
@@ -351,12 +353,14 @@ const Admin = () => {
                                 />
                             </div>
                         </section>
-                    </div>
 
-                    <div id="admin-actions">
-                        <button className="admin-action-btn" onClick={editMode ? handleEditCard : handleAddCard}>
-                            {editMode ? "Update Card" : "Add Card"}
-                        </button>
+                        <div id="button-box">
+                            {editMode ? (
+                                <button id="submit" onClick={handleEditCard}>Update Card</button>
+                            ) : (
+                                <button id="submit" onClick={handleAddCard}>Add Card</button>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
