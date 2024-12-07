@@ -95,7 +95,8 @@ const Admin = () => {
                     img_name: "",
                 });
 
-                setCards([...cards, newCard]);  // Append new card
+                // Refresh the list of cards
+                fetchCards();
             } else {
                 const message = await response.text();
                 setError(message);
@@ -156,6 +157,8 @@ const Admin = () => {
 
             if (response.ok) {
                 setSuccessMessage("Card updated successfully!");
+
+                // Refresh the list of cards after editing
                 fetchCards();
                 setEditMode(false);
                 setCurrentCardId(null);
@@ -280,7 +283,6 @@ const Admin = () => {
                                     onChange={handleInputChange}
                                     required
                                 >
-                                    <option value="">Select Rarity</option>
                                     <option value="Common">Common</option>
                                     <option value="Rare">Rare</option>
                                     <option value="Epic">Epic</option>
