@@ -36,7 +36,7 @@ const Home = () => {
                 <div id="news" className="container">
                     <section id="news-title">
                         <h2>News and Updates</h2>
-                        <p>Stay up to date with the latest additions to the DeckMaster Archive! ...</p>
+                        <p>Stay up to date with the latest additions to the DeckMaster Archive! We’re constantly expanding our collection to bring you new and exciting cards, features, and updates. Be sure to check back often to explore the latest entries, discover powerful new cards, and enhance your gameplay experience!</p>
                     </section>
                     <section id="news-cards" className="container">
                         <NewsCard 
@@ -63,7 +63,7 @@ const Home = () => {
                 <div id="featured-cards" className="container">
                     <section id="featured-cards-title">
                         <h2>Featured Cards</h2>
-                        <p>Discover some of the most powerful and exciting cards in the DeckMaster Archive! ...</p>
+                        <p>Discover some of the most powerful and exciting cards in the DeckMaster Archive! Dive into a world of legendary cards, unique abilities, and thrilling gameplay possibilities. Explore the Archive to find rare and iconic cards that can transform your deck and give you an edge in your next match!</p>
                     </section>
                     <section id="featured-cards-cards" className="container">
                         <FeaturedCard 

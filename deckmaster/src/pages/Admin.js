@@ -158,7 +158,6 @@ const Admin = () => {
             if (response.ok) {
                 setSuccessMessage("Card updated successfully!");
 
-                // Refresh the list of cards after editing
                 fetchCards();
                 setEditMode(false);
                 setCurrentCardId(null);
@@ -206,9 +205,6 @@ const Admin = () => {
             <h1 id="admin-title">DeckMaster Admin</h1>
             <h2 id="secondary-admin-title">Card Management</h2>
 
-            {error && <div className="error-message">{error}</div>}
-            {successMessage && <div className="success-message">{successMessage}</div>}
-
             <div id="admin-content">
                 <div id="admin-search-button">
                     <button>Search</button>
@@ -242,6 +238,10 @@ const Admin = () => {
                     </section>
                 </div>
 
+                <div className="card-messages">
+                    {error && <div className="error-message">{error}</div>}
+                    {successMessage && <div className="success-message">{successMessage}</div>}
+                </div>
                 <div id="add-card-content">
                     <h2>{editMode ? "Edit Card" : "Add New Card"}</h2>
                     <div id="admin-container" className="container">
@@ -311,7 +311,7 @@ const Admin = () => {
                                     name="attack"
                                     value={cardData.attack}
                                     onChange={handleInputChange}
-                                    placeholder="Enter Attack"
+                                    placeholder="Enter Attack Value"
                                     required
                                 />
                             </div>
@@ -323,7 +323,7 @@ const Admin = () => {
                                     name="defense"
                                     value={cardData.defense}
                                     onChange={handleInputChange}
-                                    placeholder="Enter Defense"
+                                    placeholder="Enter Defense Value"
                                     required
                                 />
                             </div>
@@ -331,14 +331,14 @@ const Admin = () => {
                         <section className="admin-box">
                             <h3>Abilities</h3>
                             <div className="admin-input">
-                                <p>Abilities</p>
+                                <p>Abilities (separated by commas)</p>
                                 <input
                                     className="admin-input-box"
                                     type="text"
                                     name="abilities"
                                     value={cardData.abilities}
                                     onChange={handleInputChange}
-                                    placeholder="Enter Abilities (comma separated)"
+                                    placeholder="Enter Abilities"
                                     required
                                 />
                             </div>
@@ -355,13 +355,10 @@ const Admin = () => {
                                 />
                             </div>
                         </section>
-
-                        <div id="button-box">
-                            {editMode ? (
-                                <button id="submit" onClick={handleEditCard}>Update Card</button>
-                            ) : (
-                                <button id="submit" onClick={handleAddCard}>Add Card</button>
-                            )}
+                        <div className="admin-action">
+                            <button onClick={editMode ? handleEditCard : handleAddCard}>
+                                {editMode ? "Save Changes" : "Add Card"}
+                            </button>
                         </div>
                     </div>
                 </div>
